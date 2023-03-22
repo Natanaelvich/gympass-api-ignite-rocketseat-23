@@ -1,5 +1,9 @@
 version: '3'
 
+volumes:
+  postgres_data:
+    driver: local
+
 services:
   api-solid-pg:
     image: bitnami/postgresql
@@ -9,3 +13,5 @@ services:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=gympass
+    volumes:
+      - postgres_data:/bitnami/postgresql
