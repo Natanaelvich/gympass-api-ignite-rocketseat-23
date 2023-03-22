@@ -7,7 +7,9 @@
     "dev": "tsx watch src/server.ts",
     "dev:docker": "docker compose up -d && tsx watch src/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+    "test": "vitest run",
+    "test:watch": "vitest "
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,9 @@
     "prisma": "^4.11.0",
     "tsup": "^6.7.0",
     "tsx": "3.12.3",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "vite-tsconfig-paths": "^4.0.7",
+    "vitest": "^0.29.7"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
