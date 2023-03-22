@@ -21,7 +21,7 @@ interface RegisterUseCaseResponse {
 // Dependency Inversion Principle
 
 export class RegisterUseCase {
-  constructor(private usersRepository: UsersRepository) { }
+  constructor(private usersRepository: UsersRepository) {}
 
   async handle({
     name,

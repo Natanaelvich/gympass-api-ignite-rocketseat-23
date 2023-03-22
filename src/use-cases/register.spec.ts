@@ -5,7 +5,7 @@ import { RegisterUseCase } from './register'
 describe('Register Use Case', () => {
   it('should hash the password before saving it to the database', async () => {
     const registerUseCase = new RegisterUseCase({
-      async findByEmail(email) {
+      async findByEmail() {
         return null
       },
 
@@ -28,7 +28,7 @@ describe('Register Use Case', () => {
 
     const isPasswordCorrectlyHashed = await compare(
       '123456',
-      user.password_hash,
+      user.password_hash
     )
 
     expect(isPasswordCorrectlyHashed).toBe(true)

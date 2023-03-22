@@ -4,7 +4,6 @@ import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
     name: z.string(),
