@@ -15,6 +15,16 @@ describe('Register Use Case', () => {
     registerUseCase = new RegisterUseCase(usersRepository)
   })
 
+  it('should be able to register', async () => {
+    const { user } = await registerUseCase.handle({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    expect(user.id).toEqual(expect.any(String))
+  })
+
   it('should hash the password before saving it to the database', async () => {
     const { user } = await registerUseCase.handle({
       name: 'John Doe',
