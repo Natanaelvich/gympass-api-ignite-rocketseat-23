@@ -12,11 +12,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/yarn
+          ./node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Use Node.js 16.x and Yarn
       uses: actions/setup-node@v2
       with:
         node-version: '16.x'
-    - name: Install dependencies
-      run: npm install
+        cache: 'yarn'
+      run: |
+        npm install -g yarn
+        yarn install --frozen-lockfile
     - name: Run linter and tests
-      run: npm run lint && npm run test
+      run: yarn lint && yarn test
