@@ -21,11 +21,12 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
-    - name: Use Node.js 16.x and Yarn
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v2
       with:
         node-version: '16.x'
         cache: 'yarn'
+    - name: Install Yarn and dependencies
       run: |
         npm install -g yarn
         yarn install --frozen-lockfile
