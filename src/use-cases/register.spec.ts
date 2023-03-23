@@ -1,10 +1,11 @@
 import { expect, describe, it } from 'vitest'
 import { compare } from 'bcryptjs'
 import { RegisterUseCase } from './register'
+import { UsersRepository } from '@/repositories/users-repository'
 
 describe('Register Use Case', () => {
   it('should hash the password before saving it to the database', async () => {
-    const registerUseCase = new RegisterUseCase({
+    const usersRepository: UsersRepository = {
       async findByEmail() {
         return null
       },
@@ -18,7 +19,9 @@ describe('Register Use Case', () => {
           created_at: new Date(),
         }
       },
-    })
+    }
+
+    const registerUseCase = new RegisterUseCase(usersRepository)
 
     const { user } = await registerUseCase.handle({
       name: 'John Doe',
