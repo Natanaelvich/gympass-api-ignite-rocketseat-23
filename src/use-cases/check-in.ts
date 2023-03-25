@@ -20,15 +20,15 @@ export class CheckInUseCase {
     userId,
     gymId,
   }: CheckInUseCaseRequest): Promise<CheckInUseCaseResponse> {
-    const checkIn = await this.checkInsRepository.create({
-      user_id: userId,
-      gym_id: gymId,
-    })
-
     const checkInOnSameDay = await this.checkInsRepository.findByUserIdOnDate(
       userId,
       new Date()
     )
+
+    const checkIn = await this.checkInsRepository.create({
+      user_id: userId,
+      gym_id: gymId,
+    })
 
     if (checkInOnSameDay) {
       throw new MaxNumberOfCheckInsError()
