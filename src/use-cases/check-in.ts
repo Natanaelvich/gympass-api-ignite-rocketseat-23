@@ -1,5 +1,6 @@
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { CheckIn } from '@prisma/client'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 
 interface CheckInUseCaseRequest {
   userId: string
@@ -23,6 +24,15 @@ export class CheckInUseCase {
       user_id: userId,
       gym_id: gymId,
     })
+
+    const checkInOnSameDay = await this.checkInsRepository.findByUserIdOnDate(
+      userId,
+      new Date()
+    )
+
+    if (checkInOnSameDay) {
+      throw new MaxNumberOfCheckInsError()
+    }
 
     return {
       checkIn,
