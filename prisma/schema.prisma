@@ -43,9 +43,6 @@ model Gym {
     latitude    Decimal
     longitude   Decimal
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
     checkIns CheckIn[]
 
     @@map("gyms")
