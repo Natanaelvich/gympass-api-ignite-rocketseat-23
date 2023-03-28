@@ -37,7 +37,7 @@ describe('Validate Check-in Use Case', () => {
     await expect(() =>
       sut.execute({
         checkInId: 'inexistent-check-in-id',
-      }),
+      })
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 
@@ -56,7 +56,7 @@ describe('Validate Check-in Use Case', () => {
     await expect(() =>
       sut.execute({
         checkInId: createdCheckIn.id,
-      }),
+      })
     ).rejects.toBeInstanceOf(LateCheckInValidationError)
   })
 })
