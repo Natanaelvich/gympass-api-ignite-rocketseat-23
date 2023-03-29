@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit && eslint .",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:create-prisma-environment": "yarn link ./prisma/vitest-environment-prisma",
+    "test:create-prisma-environment": "cd ./prisma/vitest-environment-prisma && yarn link",
     "test:install-prisma-environment": "yarn link vitest-environment-prisma",
     "pretest:e2e": "yarn test:create-prisma-environment && yarn test:install-prisma-environment",
     "test:e2e": "vitest run --dir src/http",
