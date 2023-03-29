@@ -12,7 +12,12 @@
     "test:watch": "vitest ",
     "lint": "tsc --noEmit && eslint .",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:create-prisma-environment": "yarn link ./prisma/vitest-environment-prisma",
+    "test:install-prisma-environment": "yarn link vitest-environment-prisma",
+    "pretest:e2e": "yarn test:create-prisma-environment && yarn test:install-prisma-environment",
+    "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http"
   },
   "keywords": [],
   "author": "",
