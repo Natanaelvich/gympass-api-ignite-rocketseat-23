@@ -26,6 +26,7 @@ describe('Authenticate (e2e)', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       token: expect.any(String),
+      refreshToken: expect.any(String),
     })
   })
 })
