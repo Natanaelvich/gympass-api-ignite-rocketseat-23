@@ -8,7 +8,7 @@
     "dev:docker": "docker compose up -d && tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
+    "test": "yarn pretest:e2e && vitest run",
     "test:watch": "vitest ",
     "lint": "tsc --noEmit && eslint .",
     "test:coverage": "vitest run --coverage",
