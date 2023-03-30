@@ -4,7 +4,6 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Authenticate (e2e)', () => {
   beforeAll(async () => {
-    console.log('beforeAll')
     await app.ready()
   })
 
