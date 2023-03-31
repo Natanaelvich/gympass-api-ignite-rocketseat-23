@@ -8,7 +8,7 @@
     "dev:docker": "docker compose up -d && tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
+    "test": "yarn pretest:e2e && vitest run",
     "test:watch": "vitest ",
     "lint": "tsc --noEmit && eslint .",
     "test:coverage": "vitest run --coverage",
@@ -45,6 +45,7 @@
     "vitest": "^0.29.7"
   },
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
     "@fastify/jwt": "^6.7.1",
     "@prisma/client": "^4.11.0",
     "bcryptjs": "^2.4.3",
