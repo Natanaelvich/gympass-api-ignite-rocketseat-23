@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit && eslint .",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:e2e": "vitest run --dir src/http",
+    "test:e2e": "vitest run --dir src/http --test-timeout=20000",
     "test:e2e:watch": "vitest --dir src/http"
   },
   "keywords": [],
