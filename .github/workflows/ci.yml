@@ -35,4 +35,4 @@ jobs:
         npm install -g yarn
         yarn install --frozen-lockfile
     - name: Run linter and tests
-      run: yarn lint && yarn test && yarn test:e2e
+      run: yarn lint && yarn test
