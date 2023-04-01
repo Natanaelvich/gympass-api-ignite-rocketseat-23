@@ -4,11 +4,11 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Register (e2e)', () => {
   beforeAll(async () => {
-    await app.ready()
+    // await app.ready()
   })
 
   afterAll(async () => {
-    await app.close()
+    // await app.close()
   })
 
   it('should be able to register', async () => {
