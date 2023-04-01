@@ -1,7 +1,7 @@
 import 'dotenv/config'
 
 import { randomUUID } from 'node:crypto'
-import { execSync } from 'node:child_process'
+import { exec } from 'node:child_process'
 import { Environment } from 'vitest'
 import { PrismaClient } from '@prisma/client'
 
@@ -27,7 +27,7 @@ export default <Environment>{
 
     process.env.DATABASE_URL = databaseURL
 
-    execSync('yarn prisma migrate deploy')
+    exec('yarn prisma migrate deploy')
 
     return {
       async teardown() {
