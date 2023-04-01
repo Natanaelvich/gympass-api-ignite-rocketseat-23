@@ -19,6 +19,21 @@ function generateDatabaseURL(schema: string) {
   return url.toString()
 }
 
+async function runPrismaMigrate() {
+  return new Promise((resolve, reject) => {
+    exec('yarn prisma migrate deploy', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`)
+        reject(error)
+        return
+      }
+      console.log(`stdout: ${stdout}`)
+      console.error(`stderr: ${stderr}`)
+      resolve(stdout)
+    })
+  })
+}
+
 export default <Environment>{
   name: 'prisma',
   async setup() {
@@ -27,7 +42,7 @@ export default <Environment>{
 
     process.env.DATABASE_URL = databaseURL
 
-    exec('yarn prisma migrate deploy')
+    await runPrismaMigrate()
 
     return {
       async teardown() {
