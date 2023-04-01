@@ -1,9 +1,9 @@
 import request from 'supertest'
-import { app } from '../../app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { generateRandomDigits } from '@/utils/test/generators'
+import { app } from '@/app'
 
-describe('Profile (e2e)', () => {
+describe('Authenticate (e2e)', () => {
   let randomDigits = '1234'
 
   beforeAll(async () => {
@@ -15,7 +15,7 @@ describe('Profile (e2e)', () => {
     await app.close()
   })
 
-  it('should be able to get user profile', async () => {
+  it('should be able to authenticate', async () => {
     await request(app.server)
       .post('/users')
       .send({
@@ -31,16 +31,9 @@ describe('Profile (e2e)', () => {
         password: '123456',
       })
 
-    const profileResponse = await request(app.server)
-      .get('/me')
-      .set('Authorization', `Bearer ${response.body.token}`)
-      .send()
-
-    expect(profileResponse.statusCode).toBe(200)
-    expect(profileResponse.body.user).toEqual(
-      expect.objectContaining({
-        email: `${randomDigits}@example.com`,
-      })
-    )
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toEqual({
+      token: expect.any(String),
+    })
   })
 })

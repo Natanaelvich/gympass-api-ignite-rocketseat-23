@@ -1,5 +1,5 @@
+import { app } from '@/app'
 import { generateRandomDigits } from '@/utils/test/generators'
-import { app } from '../../app'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
