@@ -10,7 +10,7 @@ export async function createAndAuthenticateUser(
 ) {
   const randomDigits = await generateRandomDigits(request)
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       name: 'John doe',
       email: `${randomDigits}@example.com`,
@@ -30,5 +30,6 @@ export async function createAndAuthenticateUser(
 
   return {
     token,
+    user,
   }
 }
