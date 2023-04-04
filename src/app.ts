@@ -23,10 +23,9 @@ app.register(fastifyJwt, {
 
 app.register(fastifyCookie)
 
-// Add the rate limiter registration
 app.register(fastifyRateLimiter, {
-  max: 100, // max number of requests per time window
-  timeWindow: 1000 * 60, // the length of the time window
+  max: 100,
+  timeWindow: 1000 * 60,
 })
 
 app.register(usersRoutes)
