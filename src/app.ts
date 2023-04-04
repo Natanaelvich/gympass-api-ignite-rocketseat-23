@@ -7,6 +7,12 @@ import { env } from './env'
 import { gymsRoutes } from './http/controllers/gyms/routes'
 import { usersRoutes } from './http/controllers/users/routes'
 import { checkInsRoutes } from './http/controllers/check-ins/routes'
+import * as Sentry from '@sentry/node'
+
+Sentry.init({
+  dsn: env.SENTRY_KEY,
+  tracesSampleRate: 1.0,
+})
 
 export const app = fastify()
 
@@ -40,7 +46,7 @@ app.setErrorHandler((error, _, reply) => {
   }
 
   if (env.NODE_ENV !== 'production') {
-    console.log(error)
+    Sentry.captureException(error)
   } else {
     // TODO: Here we should log to an external tool like DataDog/NewRelic/Sentry
   }
