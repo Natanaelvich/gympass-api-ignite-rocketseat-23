@@ -1,6 +1,7 @@
 import fastifyCookie from '@fastify/cookie'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
+import fastifyRateLimiter from 'fastify-rate-limiter'
 import { ZodError } from 'zod'
 import { env } from './env'
 import { gymsRoutes } from './http/controllers/gyms/routes'
@@ -21,6 +22,12 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCookie)
+
+// Add the rate limiter registration
+app.register(fastifyRateLimiter, {
+  max: 100, // max number of requests per time window
+  timeWindow: 1000 * 60, // the length of the time window
+})
 
 app.register(usersRoutes)
 app.register(gymsRoutes)
