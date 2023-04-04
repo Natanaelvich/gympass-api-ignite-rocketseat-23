@@ -1,11 +1,22 @@
 import fastifyCookie from '@fastify/cookie'
 import fastifyJwt from '@fastify/jwt'
 import fastify from 'fastify'
+import fastifyRateLimiter from 'fastify-rate-limiter'
 import { ZodError } from 'zod'
 import { env } from './env'
 import { gymsRoutes } from './http/controllers/gyms/routes'
 import { usersRoutes } from './http/controllers/users/routes'
 import { checkInsRoutes } from './http/controllers/check-ins/routes'
+import * as Sentry from '@sentry/node'
+
+Sentry.init({
+  dsn: env.SENTRY_KEY,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+  ],
+  tracesSampleRate: 1.0,
+})
 
 export const app = fastify()
 
@@ -22,6 +33,11 @@ app.register(fastifyJwt, {
 
 app.register(fastifyCookie)
 
+app.register(fastifyRateLimiter, {
+  max: 100,
+  timeWindow: 1000 * 60,
+})
+
 app.register(usersRoutes)
 app.register(gymsRoutes)
 app.register(checkInsRoutes)
@@ -34,7 +50,7 @@ app.setErrorHandler((error, _, reply) => {
   }
 
   if (env.NODE_ENV !== 'production') {
-    console.log(error)
+    Sentry.captureException(error)
   } else {
     // TODO: Here we should log to an external tool like DataDog/NewRelic/Sentry
   }
