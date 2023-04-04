@@ -11,6 +11,10 @@ import * as Sentry from '@sentry/node'
 
 Sentry.init({
   dsn: env.SENTRY_KEY,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+  ],
   tracesSampleRate: 1.0,
 })
 
